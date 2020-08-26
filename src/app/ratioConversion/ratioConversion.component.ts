@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Unit } from '../core/model/unit.model';
-import { UnitType } from '../core/model/unit.enum';
+import { UnitType } from '../core/model/unitType.enum';
+import { UnitWeight } from '../core/model/UnitWeight.model';
 
 @Component({
     selector: 'app-ratio-conversion',
@@ -46,7 +47,7 @@ export class RatioConversionComponent {
 
     nextType: null | UnitType = null;
 
-    convertionFactor: number;
+    convertionFactor: UnitWeight;
 
     unitSelected(unit: Unit): void {
         if (!this.fromP1) {
@@ -64,7 +65,7 @@ export class RatioConversionComponent {
 
         if (this.fromP1 && this.fromP2 && this.toP1 && this.toP2) {
             this.showUnitTable = false;
-            this.convertionFactor = (this.fromP1.weight * this.toP2.weight) / (this.toP1.weight * this.fromP2.weight);
+            this.convertionFactor = this.processConvertionFactor();
             this.convertionEnable = true;
         }
     }
@@ -84,7 +85,14 @@ export class RatioConversionComponent {
     reverseConvertion(): void {
         if (this.fromP1 && this.fromP2 && this.toP1 && this.toP2) {
             [this.fromP1, this.fromP2, this.toP1, this.toP2] = [this.toP1, this.toP2, this.fromP1, this.fromP2];
-            this.convertionFactor = (this.fromP1.weight * this.toP2.weight) / (this.toP1.weight * this.fromP2.weight);
+            this.convertionFactor = this.processConvertionFactor();
         }
+    }
+
+    processConvertionFactor(): UnitWeight {
+        return {
+            a: (this.fromP1.weight.a * this.toP2.weight.a) / (this.toP1.weight.a * this.fromP2.weight.a),
+            b: 0 // TODO: a définir pour débloquer la conversion de la température
+        };
     }
 }

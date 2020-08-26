@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { INFERRED_TYPE } from '@angular/compiler/src/output/output_ast';
+import { UnitWeight } from '../core/model/UnitWeight.model';
 
 @Component({
   selector: 'app-convert-box',
@@ -26,11 +26,11 @@ export class ConvertBoxComponent implements OnInit, OnChanges, OnDestroy {
   @Input() resultSufix: string | Array<string> | undefined;
   @Input() resultIconSufix: string | Array<string> | undefined;
 
-  @Input() factor: number | Array<number> = 1;
-  @Input() precision: number | undefined = 2;
+  @Input() factor: UnitWeight | Array<UnitWeight> = { a: 1, b: 0 };
+  @Input() precision: number | undefined = 3;
   @Input() forcedValue: string;
 
-  @Output() valueChange: EventEmitter<string> = new EventEmitter();
+  @Output() valueChange: EventEmitter<string | number> = new EventEmitter();
   @Output() reverseConvertion: EventEmitter<void> = new EventEmitter();
 
   value = new FormControl('');
@@ -40,8 +40,8 @@ export class ConvertBoxComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.subscription.add(
-      this.value.valueChanges.subscribe((value: string) => {
-        if (!value) {
+      this.value.valueChanges.subscribe((value: string | number) => {
+        if ((!value && value !== 0) || !this.factor) {
           this.convertedValue = '';
           return;
         }
@@ -49,10 +49,10 @@ export class ConvertBoxComponent implements OnInit, OnChanges, OnDestroy {
         if (!isNaN(+value)) {
           const prefix = (this.resultPrefix ? this.resultPrefix + ' ' : '');
           if (!this.multipleResult) {
-            this.convertedValue = prefix + this.processConvertion(+value, (this.factor as number), this.precision);
+            this.convertedValue = prefix + this.processConvertion(+value, (this.factor as UnitWeight), this.precision);
           } else {
             this.convertedValue = new Array<string>();
-            (this.factor as Array<number>).forEach((factor: number, index: number) => {
+            (this.factor as Array<UnitWeight>).forEach((factor: UnitWeight, index: number) => {
               (this.convertedValue as Array<string>)[index] = prefix + this.processConvertion(+value, factor, this.precision);
             });
           }
@@ -63,8 +63,8 @@ export class ConvertBoxComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
-  processConvertion(value: number, factor: number, precision: number | undefined): number {
-    let result = value * factor;
+  processConvertion(value: number, factor: UnitWeight, precision: number | undefined): number {
+    let result = value * factor.a + factor.b;
 
     if (precision !== undefined) {
       result = Math.round(result * Math.pow(10, precision + 1)) / Math.pow(10, (precision + 1));

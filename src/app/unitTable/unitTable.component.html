@@ -1,6 +1,6 @@
 <div [ngStyle]="{'backgroundColor': backgroundColor, 'color': color, 'border-color': color}" class="container">
   <mat-tab-group dynamicHeight #tabs>
-    <mat-tab [disabled]="disableLength">
+    <mat-tab *ngIf="!hideLength" [disabled]="disableAllSectionBut && disableAllSectionBut !== unitTypes.Length">
       <ng-template mat-tab-label>
         <mat-icon [ngStyle]="{'color': color}">straighten</mat-icon>
       </ng-template>
@@ -14,7 +14,7 @@
       </div>
     </mat-tab>
 
-    <mat-tab [disabled]="disableWeight">
+    <mat-tab *ngIf="!hideWeight" [disabled]="disableAllSectionBut && disableAllSectionBut !== unitTypes.Weight">
       <ng-template mat-tab-label>
         <mat-icon [ngStyle]="{'color': color}">fitness_center</mat-icon>
       </ng-template>
@@ -28,21 +28,7 @@
       </div>
     </mat-tab>
 
-    <mat-tab [disabled]="disableTemperature">
-      <ng-template mat-tab-label>
-        <div [ngStyle]="{'color': color}" style="font-size: 25px; margin-bottom: 8px;">🌡</div>
-      </ng-template>
-
-      <!-- Content -->
-      <div *ngFor="let unit of temperatureUnit; let index = index" class="unit centerText" [matTooltip]="unit.label"
-        matTooltipClass="tooltip"
-        [ngStyle]="{'backgroundColor': hoverIndex !== index ? backgroundColor : color, 'color': hoverIndex !== index ? color : backgroundColor, 'border-color': color }"
-        (click)="unitChoosed(unit)" (mouseover)="hoverIndex=index" (mouseleave)="hoverIndex=undefined">
-        {{ unit.shortLabel }}
-      </div>
-    </mat-tab>
-
-    <mat-tab [disabled]="disableMoney">
+    <mat-tab *ngIf="!hideMoney" [disabled]="disableAllSectionBut && disableAllSectionBut !== unitTypes.Money">
       <ng-template mat-tab-label>
         <mat-icon [ngStyle]="{'color': color}">attach_money</mat-icon>
       </ng-template>
@@ -56,7 +42,7 @@
       </div>
     </mat-tab>
 
-    <mat-tab [disabled]="disableArea">
+    <mat-tab *ngIf="!hideArea" [disabled]="disableAllSectionBut && disableAllSectionBut !== unitTypes.Area">
       <ng-template mat-tab-label>
         <mat-icon [ngStyle]="{'color': color}">straighten</mat-icon>²
       </ng-template>
@@ -70,13 +56,27 @@
       </div>
     </mat-tab>
 
-    <mat-tab [disabled]="disableVolume">
+    <mat-tab *ngIf="!hideVolume" [disabled]="disableAllSectionBut && disableAllSectionBut !== unitTypes.Volume">
       <ng-template mat-tab-label>
         <mat-icon [ngStyle]="{'color': color}">straighten</mat-icon>³
       </ng-template>
 
       <!-- Content -->
       <div *ngFor="let unit of volumeUnit; let index = index" class="unit centerText" [matTooltip]="unit.label"
+        matTooltipClass="tooltip"
+        [ngStyle]="{'backgroundColor': hoverIndex !== index ? backgroundColor : color, 'color': hoverIndex !== index ? color : backgroundColor, 'border-color': color }"
+        (click)="unitChoosed(unit)" (mouseover)="hoverIndex=index" (mouseleave)="hoverIndex=undefined">
+        {{ unit.shortLabel }}
+      </div>
+    </mat-tab>
+
+    <mat-tab *ngIf="!hideTemperature" [disabled]="disableAllSectionBut && disableAllSectionBut !== unitTypes.Temperature">
+      <ng-template mat-tab-label>
+        <div [ngStyle]="{'color': color}" style="font-size: 25px;">T</div>
+      </ng-template>
+
+      <!-- Content -->
+      <div *ngFor="let unit of temperatureUnit; let index = index" class="unit centerText" [matTooltip]="unit.label"
         matTooltipClass="tooltip"
         [ngStyle]="{'backgroundColor': hoverIndex !== index ? backgroundColor : color, 'color': hoverIndex !== index ? color : backgroundColor, 'border-color': color }"
         (click)="unitChoosed(unit)" (mouseover)="hoverIndex=index" (mouseleave)="hoverIndex=undefined">

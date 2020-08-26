@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UnitWeight } from '../core/model/UnitWeight.model';
 
 @Component({
   selector: 'app-tips',
@@ -13,8 +14,8 @@ export class TipsComponent {
 
   tipsTooltip = 'Les pourboires représentent souvent 15% du montant hors taxe (10% au minimum, 20 pour un service excellent).';
 
-  taxeFactor = 1.13;
-  tipsFactors = [0.1, 0.15, 0.2];
+  taxeFactor: UnitWeight = { a: 1.13, b: 0 };
+  tipsFactors: Array<UnitWeight> = [{ a: 0.1, b: 0 }, { a: 0.15, b: 0 }, { a: 0.2, b: 0 }];
   total = '';
 
   valueChange(value: string): void {
@@ -31,7 +32,8 @@ export class TipsComponent {
 
   processTotal(value: string): void {
     if (!isNaN(+value)) {
-      const total = (+value) * this.taxeFactor + (+value) * (this.tipsFactors.reduce((p, c) => c += p) / this.tipsFactors.length);
+      const tipsSum = this.tipsFactors.reduce((accumulator, c) => accumulator += c.a, 0);
+      const total = (+value) * this.taxeFactor.a + (+value) * (tipsSum / this.tipsFactors.length);
       this.total = (Math.round(total * 100) / 100).toString();
     }
   }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Unit } from '../core/model/unit.model';
-import { UnitType } from '../core/model/unit.enum';
+import { UnitType } from '../core/model/unitType.enum';
+import { UnitWeight } from '../core/model/UnitWeight.model';
 
 @Component({
   selector: 'app-simple-conversion',
@@ -14,7 +15,7 @@ export class SimpleConversionComponent {
   showUnitTable = true;
   convertionEnable = false;
 
-  convertionFactor: number;
+  convertionFactor: UnitWeight;
 
   get unitIndex(): number {
     return this.from ? (this.to ? 2 : 1) : 0;
@@ -32,7 +33,7 @@ export class SimpleConversionComponent {
 
     if (this.from && this.to) {
       this.showUnitTable = false;
-      this.convertionFactor = this.from.weight / this.to.weight;
+      this.convertionFactor = this.processConvertionFactor();
       this.convertionEnable = true;
     }
   }
@@ -50,7 +51,14 @@ export class SimpleConversionComponent {
   reverseConvertion(): void {
     if (this.from && this.to) {
       [this.from, this.to] = [this.to, this.from];
-      this.convertionFactor = this.from.weight / this.to.weight;
+      this.convertionFactor = this.processConvertionFactor();
     }
+  }
+
+  processConvertionFactor(): UnitWeight {
+    return {
+      a: this.from.weight.a / this.to.weight.a,
+      b: (this.from.weight.b - this.to.weight.b) / this.to.weight.a
+    };
   }
 }
