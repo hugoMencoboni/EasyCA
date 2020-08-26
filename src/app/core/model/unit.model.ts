@@ -1,5 +1,5 @@
 import { UnitType } from './unitType.enum';
-import { UnitWeight } from './UnitWeight.model';
+import { UnitWeight } from './unitWeight.model';
 
 export class Unit {
     type: UnitType;
