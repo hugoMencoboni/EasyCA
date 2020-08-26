@@ -21,6 +21,8 @@ import { RatioConversionComponent } from './ratioConversion/ratioConversion.comp
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -48,7 +50,10 @@ import { environment } from '../environments/environment';
     MatInputModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [{
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: HammerGestureConfig
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

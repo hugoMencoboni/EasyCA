@@ -1,4 +1,4 @@
-<mat-tab-group>
+<mat-tab-group #tabs [selectedIndex]="selectedTab" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="marginSize-ligth">restaurant</mat-icon>
