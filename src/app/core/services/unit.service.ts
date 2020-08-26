@@ -49,7 +49,7 @@ export class UnitService {
       ...volumeUnits,
 
       { label: 'euro', shortLabel: '€', type: UnitType.Money, weight: 1 },
-      { label: 'dollar canadien', shortLabel: '$', type: UnitType.Money, weight: 1.56 },
+      { label: 'dollar canadien', shortLabel: '$', type: UnitType.Money, weight: 0.64 },
     ];
   }
 }
