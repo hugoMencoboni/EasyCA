@@ -1,0 +1,30 @@
+<mat-card class="cards">
+    <mat-card-content>
+        <div class="shareValue">
+            <mat-icon *ngIf="shareValue" (click)="changeShareStatus()">link</mat-icon>
+            <mat-icon *ngIf="!shareValue" (click)="changeShareStatus()">link_off</mat-icon>
+        </div>
+        <h1>Taxes <mat-icon style="vertical-align: sub" [matTooltip]="taxeTooltip" matTooltipClass="tooltip">
+                help_outline</mat-icon>
+        </h1>
+        <app-convert-box [inputIconSufix]="'attach_money'" [resultIconSufix]="'attach_money'" [inputSufix]="'HT'"
+            [resultSufix]="'TTC'" [factor]="1.13" [forcedValue]="sharedValue" (valueChange)="valueChange($event)">
+        </app-convert-box>
+
+        <h1>Tips <mat-icon style="vertical-align: sub" [matTooltip]="tipsTooltip" matTooltipClass="tooltip">help_outline
+            </mat-icon>
+        </h1>
+        <app-convert-box [inputIconSufix]="'attach_money'" [resultIconSufix]="'attach_money'" [multipleResult]="'true'"
+            [resultIconPrefix]="['sentiment_dissatisfied', 'sentiment_satisfied', 'sentiment_very_satisfied']"
+            [resultPrefix]="'+'" [convertIcon]="'arrow_right_alt'" [factor]="[0.1, 0.15, 0.2]"
+            [forcedValue]="sharedValue" (valueChange)="valueChange($event)"></app-convert-box>
+
+        <div *ngIf="total" class="total">
+            <hr>
+            <div style="text-align: right;">
+                ≈ {{ total }} <mat-icon style="vertical-align: sub" [matTooltip]="tipsTooltip" matTooltipClass="tooltip">attach_money
+                </mat-icon>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

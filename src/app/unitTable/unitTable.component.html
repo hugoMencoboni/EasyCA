@@ -1,0 +1,87 @@
+<div [ngStyle]="{'backgroundColor': backgroundColor, 'color': color, 'border-color': color}" class="container">
+  <mat-tab-group dynamicHeight #tabs>
+    <mat-tab [disabled]="disableLength">
+      <ng-template mat-tab-label>
+        <mat-icon [ngStyle]="{'color': color}">straighten</mat-icon>
+      </ng-template>
+
+      <!-- Content -->
+      <div *ngFor="let unit of lengthUnit; let index = index" class="unit centerText" [matTooltip]="unit.label"
+        matTooltipClass="tooltip"
+        [ngStyle]="{'backgroundColor': hoverIndex !== index ? backgroundColor : color, 'color': hoverIndex !== index ? color : backgroundColor, 'border-color': color }"
+        (click)="unitChoosed(unit)" (mouseover)="hoverIndex=index" (mouseleave)="hoverIndex=undefined">
+        {{ unit.shortLabel }}
+      </div>
+    </mat-tab>
+
+    <mat-tab [disabled]="disableWeight">
+      <ng-template mat-tab-label>
+        <mat-icon [ngStyle]="{'color': color}">fitness_center</mat-icon>
+      </ng-template>
+
+      <!-- Content -->
+      <div *ngFor="let unit of weightUnit; let index = index" class="unit centerText" [matTooltip]="unit.label"
+        matTooltipClass="tooltip"
+        [ngStyle]="{'backgroundColor': hoverIndex !== index ? backgroundColor : color, 'color': hoverIndex !== index ? color : backgroundColor, 'border-color': color }"
+        (click)="unitChoosed(unit)" (mouseover)="hoverIndex=index" (mouseleave)="hoverIndex=undefined">
+        {{ unit.shortLabel }}
+      </div>
+    </mat-tab>
+
+    <mat-tab [disabled]="disableTemperature">
+      <ng-template mat-tab-label>
+        <div [ngStyle]="{'color': color}" style="font-size: 25px; margin-bottom: 8px;">🌡</div>
+      </ng-template>
+
+      <!-- Content -->
+      <div *ngFor="let unit of temperatureUnit; let index = index" class="unit centerText" [matTooltip]="unit.label"
+        matTooltipClass="tooltip"
+        [ngStyle]="{'backgroundColor': hoverIndex !== index ? backgroundColor : color, 'color': hoverIndex !== index ? color : backgroundColor, 'border-color': color }"
+        (click)="unitChoosed(unit)" (mouseover)="hoverIndex=index" (mouseleave)="hoverIndex=undefined">
+        {{ unit.shortLabel }}
+      </div>
+    </mat-tab>
+
+    <mat-tab [disabled]="disableMoney">
+      <ng-template mat-tab-label>
+        <mat-icon [ngStyle]="{'color': color}">attach_money</mat-icon>
+      </ng-template>
+
+      <!-- Content -->
+      <div *ngFor="let unit of moneyUnit; let index = index" class="unit centerText" [matTooltip]="unit.label"
+        matTooltipClass="tooltip"
+        [ngStyle]="{'backgroundColor': hoverIndex !== index ? backgroundColor : color, 'color': hoverIndex !== index ? color : backgroundColor, 'border-color': color }"
+        (click)="unitChoosed(unit)" (mouseover)="hoverIndex=index" (mouseleave)="hoverIndex=undefined">
+        {{ unit.shortLabel }}
+      </div>
+    </mat-tab>
+
+    <mat-tab [disabled]="disableArea">
+      <ng-template mat-tab-label>
+        <mat-icon [ngStyle]="{'color': color}">straighten</mat-icon>²
+      </ng-template>
+
+      <!-- Content -->
+      <div *ngFor="let unit of areaUnit; let index = index" class="unit centerText" [matTooltip]="unit.label"
+        matTooltipClass="tooltip"
+        [ngStyle]="{'backgroundColor': hoverIndex !== index ? backgroundColor : color, 'color': hoverIndex !== index ? color : backgroundColor, 'border-color': color }"
+        (click)="unitChoosed(unit)" (mouseover)="hoverIndex=index" (mouseleave)="hoverIndex=undefined">
+        {{ unit.shortLabel }}
+      </div>
+    </mat-tab>
+
+    <mat-tab [disabled]="disableVolume">
+      <ng-template mat-tab-label>
+        <mat-icon [ngStyle]="{'color': color}">straighten</mat-icon>³
+      </ng-template>
+
+      <!-- Content -->
+      <div *ngFor="let unit of volumeUnit; let index = index" class="unit centerText" [matTooltip]="unit.label"
+        matTooltipClass="tooltip"
+        [ngStyle]="{'backgroundColor': hoverIndex !== index ? backgroundColor : color, 'color': hoverIndex !== index ? color : backgroundColor, 'border-color': color }"
+        (click)="unitChoosed(unit)" (mouseover)="hoverIndex=index" (mouseleave)="hoverIndex=undefined">
+        {{ unit.shortLabel }}
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

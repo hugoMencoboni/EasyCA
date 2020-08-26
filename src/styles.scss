@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+* {
+    font-size: 21px;
+}
+
+.cards {
+    margin: 10px auto 10px auto;
+    max-width: 600px;
+}
+
+@media screen and (max-width: 620px) {
+    .cards {
+        margin: 10px;
+    }
+}
+
+.tooltip {
+    font-size: 15px;
+}
+
+.marginRight-ligth {
+    margin-right: 8px;
+}
+
+.marginLeft-ligth {
+    margin-left: 8px;
+}
+
+.marginSize-ligth {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.rigthText {
+    text-align: right;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.material-icons.hoverBolder:hover {
+    font-weight: bold;
+    color: #4a5180;
+    vertical-align: text-top;
+}

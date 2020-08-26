@@ -1,0 +1,21 @@
+<mat-card class="cards">
+    <mat-card-content>
+        <h1 class="centerText">
+            <p [ngClass]="{'selected': unitIndex === 0}" class="inline">{{ fromP1 ? fromP1.shortLabel : '?' }} </p>/
+            <p [ngClass]="{'selected': unitIndex === 1}" class="inline">{{ fromP2 ? fromP2.shortLabel : '?' }} </p>
+            <mat-icon class="marginSize-ligth" style="vertical-align: sub">multiple_stop</mat-icon>
+            <p [ngClass]="{'selected': unitIndex === 2}" class="inline"> {{ toP1 ? toP1.shortLabel : '?'  }}</p>/
+            <p [ngClass]="{'selected': unitIndex === 3}" class="inline"> {{ toP2 ? toP2.shortLabel : '?'  }}</p>
+        </h1>
+        <div class="headerIcon">
+            <mat-icon (click)="reset()">delete</mat-icon>
+        </div>
+        <app-unit-table *ngIf="showUnitTable" (unitSelected)="unitSelected($event)" [disableAllSectionBut]="nextType">
+        </app-unit-table>
+        <div class="marginTop">
+            <app-convert-box [inputSufix]="inputSufix" [resultSufix]="resultSufix" [convertIconClickable]="'true'"
+                [enable]="convertionEnable" [factor]="convertionFactor" (reverseConvertion)="reverseConvertion()">
+            </app-convert-box>
+        </div>
+    </mat-card-content>
+</mat-card>

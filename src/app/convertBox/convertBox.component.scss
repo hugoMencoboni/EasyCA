@@ -1,0 +1,10 @@
+.resultBox {
+    background-color: #f7f8ff;
+    border-radius: 7px;
+    height: 60px;
+
+    .result {
+        display: inline-block;
+        min-width: 100px;
+    }
+}
