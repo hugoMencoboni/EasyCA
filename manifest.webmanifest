@@ -4,7 +4,7 @@
   "theme_color": "#4a5180",
   "background_color": "#fafafa",
   "display": "standalone",
-  "scope": "./",
+  "scope": "/EasyCA/",
   "start_url": "./",
   "icons": [
     {
