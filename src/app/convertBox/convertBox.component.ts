@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { UnitWeight } from '../core/model/UnitWeight.model';
+import { UnitWeight } from '../core/model/unitWeight.model';
 
 @Component({
   selector: 'app-convert-box',

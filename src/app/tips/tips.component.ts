@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UnitWeight } from '../core/model/UnitWeight.model';
+import { UnitWeight } from '../core/model/unitWeight.model';
 
 @Component({
   selector: 'app-tips',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Unit } from '../core/model/unit.model';
 import { UnitType } from '../core/model/unitType.enum';
-import { UnitWeight } from '../core/model/UnitWeight.model';
+import { UnitWeight } from '../core/model/unitWeight.model';
 
 @Component({
     selector: 'app-ratio-conversion',
