@@ -3,7 +3,8 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    gap:10px;
 }
 
 @media all and (max-width:500px) {
