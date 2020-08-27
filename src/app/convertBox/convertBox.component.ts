@@ -27,7 +27,7 @@ export class ConvertBoxComponent implements OnInit, OnChanges, OnDestroy {
   @Input() resultIconSufix: string | Array<string> | undefined;
 
   @Input() factor: UnitWeight | Array<UnitWeight> = { a: 1, b: 0 };
-  @Input() precision: number | undefined = 3;
+  @Input() precision: number | undefined = 2;
   @Input() forcedValue: string;
 
   @Output() valueChange: EventEmitter<string | number> = new EventEmitter();
@@ -67,7 +67,7 @@ export class ConvertBoxComponent implements OnInit, OnChanges, OnDestroy {
     let result = value * factor.a + factor.b;
 
     if (precision !== undefined) {
-      result = Math.round(result * Math.pow(10, precision + 1)) / Math.pow(10, (precision + 1));
+      result = Math.round(result * Math.pow(10, precision)) / Math.pow(10, precision);
     }
 
     return result;

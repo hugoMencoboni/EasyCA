@@ -8,7 +8,8 @@
                 help_outline</mat-icon>
         </h1>
         <app-convert-box [inputIconSufix]="'attach_money'" [resultIconSufix]="'attach_money'" [inputSufix]="'HT'"
-            [resultSufix]="'TTC'" [factor]="taxeFactor" [forcedValue]="sharedValue" (valueChange)="valueChange($event)">
+            [resultSufix]="'TTC'" [precision]="2" [factor]="taxeFactor" [forcedValue]="sharedValue"
+            (valueChange)="valueChange($event)">
         </app-convert-box>
 
         <h1>Tips <mat-icon style="vertical-align: sub" [matTooltip]="tipsTooltip" matTooltipClass="tooltip">help_outline
@@ -16,13 +17,14 @@
         </h1>
         <app-convert-box [inputIconSufix]="'attach_money'" [resultIconSufix]="'attach_money'" [multipleResult]="'true'"
             [resultIconPrefix]="['sentiment_dissatisfied', 'sentiment_satisfied', 'sentiment_very_satisfied']"
-            [resultPrefix]="'+'" [convertIcon]="'arrow_right_alt'" [factor]="tipsFactors"
-            [forcedValue]="sharedValue" (valueChange)="valueChange($event)"></app-convert-box>
+            [resultPrefix]="'+'" [convertIcon]="'arrow_right_alt'" [factor]="tipsFactors" [forcedValue]="sharedValue"
+            [precision]="2" (valueChange)="valueChange($event)"></app-convert-box>
 
         <div *ngIf="total" class="total">
             <hr>
             <div style="text-align: right;">
-                ≈ {{ total }} <mat-icon style="vertical-align: sub" [matTooltip]="tipsTooltip" matTooltipClass="tooltip">attach_money
+                ≈ {{ total }} <mat-icon style="vertical-align: sub" [matTooltip]="tipsTooltip"
+                    matTooltipClass="tooltip">attach_money
                 </mat-icon>
             </div>
         </div>
