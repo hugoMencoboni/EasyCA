@@ -18,10 +18,9 @@ export class AppComponent implements AfterViewInit {
   }
 
   swipe(eType) {
-    if (eType === this.SWIPE_ACTION.LEFT && this.selectedTab > 0) {
+    if (eType === this.SWIPE_ACTION.RIGHT && this.selectedTab > 0) {
       this.selectedTab--;
-    }
-    else if (eType === this.SWIPE_ACTION.RIGHT && this.selectedTab < this.tabLength) {
+    } else if (eType === this.SWIPE_ACTION.LEFT && this.selectedTab < this.tabLength) {
       this.selectedTab++;
     }
   }
