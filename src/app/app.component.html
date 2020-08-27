@@ -1,38 +1,40 @@
-<mat-tab-group #tabs [selectedIndex]="selectedTab" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="marginSize-ligth">restaurant</mat-icon>
-      <mat-icon class="marginSize-ligth">monetization_on</mat-icon>
-    </ng-template>
+<div (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
+  <mat-tab-group #tabs [selectedIndex]="selectedTab">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="marginSize-ligth">restaurant</mat-icon>
+        <mat-icon class="marginSize-ligth">monetization_on</mat-icon>
+      </ng-template>
 
-    <!-- Content -->
-    <app-tips></app-tips>
-  </mat-tab>
+      <!-- Content -->
+      <app-tips></app-tips>
+    </mat-tab>
 
-  <mat-tab>
-    <ng-template mat-tab-label>
-      ? <mat-icon class="marginSize-ligth">multiple_stop</mat-icon> ?
-    </ng-template>
-    
-    <!-- Content -->
-    <app-simple-conversion></app-simple-conversion>
-  </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        ? <mat-icon class="marginSize-ligth">multiple_stop</mat-icon> ?
+      </ng-template>
 
-  <mat-tab>
-    <ng-template mat-tab-label>
-      ? / ? <mat-icon class="marginSize-ligth">multiple_stop</mat-icon> ?/?
-    </ng-template>
-    
-    <!-- Content -->
-    <app-ratio-conversion></app-ratio-conversion>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="marginSize-ligth">access_time</mat-icon>
-      <mat-icon class="marginSize-ligth">public</mat-icon>
-    </ng-template>
+      <!-- Content -->
+      <app-simple-conversion></app-simple-conversion>
+    </mat-tab>
 
-    <!-- Content -->
-    <app-time-diff></app-time-diff>
-  </mat-tab>
-</mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        ? / ? <mat-icon class="marginSize-ligth">multiple_stop</mat-icon> ?/?
+      </ng-template>
+
+      <!-- Content -->
+      <app-ratio-conversion></app-ratio-conversion>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="marginSize-ligth">access_time</mat-icon>
+        <mat-icon class="marginSize-ligth">public</mat-icon>
+      </ng-template>
+
+      <!-- Content -->
+      <app-time-diff></app-time-diff>
+    </mat-tab>
+  </mat-tab-group>
+</div>
