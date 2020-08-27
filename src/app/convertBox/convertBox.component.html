@@ -1,36 +1,38 @@
-<form class="centerText">
+<form class="flexResponsive">
     <!-- Input -->
-    <mat-form-field class="marginRight-ligth">
-        <mat-icon *ngIf="inputIconPrefix" style="vertical-align: sub">{{ inputIconPrefix }}</mat-icon>
-        <p *ngIf="inputPrefix" class="inline">{{ inputPrefix }}</p>
-        <input style="text-align: right;" matInput [formControl]="value" type="number"
-            (click)="$event.target.select()">
-    </mat-form-field>
-    <mat-icon *ngIf="inputIconSufix" style="vertical-align: sub">{{ inputIconSufix }}</mat-icon>
-    <p *ngIf="inputSufix" class="inline">{{ inputSufix }}</p>
-
-    <mat-icon class="marginSize-ligth" style="vertical-align: sub" [ngClass]="{'hoverBolder': convertIconClickable}"
-        (click)="convertIconClicked()">{{ convertIcon }}</mat-icon>
-
-    <!-- Result -->
-    <div *ngIf="!multipleResult" class="resultBox inline">
-        <mat-icon *ngIf="resultIconPrefix" class="marginLeft-ligth" style="vertical-align: sub">{{ resultIconPrefix }}
-        </mat-icon>
-        <p class="result rigthText marginRight-ligth">{{ convertedValue }}</p>
-        <mat-icon *ngIf="resultIconSufix" style="vertical-align: sub">{{ resultIconSufix }}</mat-icon>
-        <p *ngIf="resultSufix" class="inline marginRight-ligth">{{ resultSufix }}</p>
+    <div class="flex">
+        <mat-form-field>
+            <mat-icon *ngIf="inputIconPrefix" style="vertical-align: sub">{{ inputIconPrefix }}</mat-icon>
+            <p *ngIf="inputPrefix" class="inline">{{ inputPrefix }}</p>
+            <input style="text-align: right;" matInput [formControl]="value" type="number"
+                (click)="$event.target.select()">
+        </mat-form-field>
+        <mat-icon *ngIf="inputIconSufix">{{ inputIconSufix }}</mat-icon>
+        <p *ngIf="inputSufix">{{ inputSufix }}</p>
     </div>
 
-    <div *ngIf="multipleResult" class="inline" style="vertical-align: middle;">
-        <div *ngFor="let f of factor; let index = index" class="resultBox">
-            <mat-icon *ngIf="resultIconPrefix" class="marginLeft-ligth" style="vertical-align: sub">
+    <mat-icon class="rotateOnResize" [ngClass]="{'hoverBolder': convertIconClickable}" (click)="convertIconClicked()">
+        {{ convertIcon }}</mat-icon>
+
+    <!-- Result -->
+    <div *ngIf="!multipleResult" class="resultBox flex">
+        <mat-icon *ngIf="resultIconPrefix">{{ resultIconPrefix }}
+        </mat-icon>
+        <p class="result rigthText">{{ convertedValue }}</p>
+        <mat-icon *ngIf="resultIconSufix">{{ resultIconSufix }}</mat-icon>
+        <p *ngIf="resultSufix">{{ resultSufix }}</p>
+    </div>
+
+    <div *ngIf="multipleResult">
+        <div *ngFor="let f of factor; let index = index" class="resultBox flex">
+            <mat-icon *ngIf="resultIconPrefix">
                 {{ isArray(resultIconPrefix) ? resultIconPrefix[index] : resultIconPrefix }}
             </mat-icon>
-            <p class="result rigthText marginRight-ligth">{{ convertedValue ? convertedValue[index] : '' }}</p>
-            <mat-icon *ngIf="resultIconSufix && resultIconSufix[index]" style="vertical-align: sub">
+            <p class="result rigthText">{{ convertedValue ? convertedValue[index] : '' }}</p>
+            <mat-icon *ngIf="resultIconSufix && resultIconSufix[index]">
                 {{ isArray(resultIconSufix) ? resultIconSufix[index] : resultIconSufix }}
             </mat-icon>
-            <p *ngIf="resultSufix && resultSufix[index]" class="inline marginRight-ligth">
+            <p *ngIf="resultSufix && resultSufix[index]">
                 {{ isArray(resultSufix) ? resultSufix[index] : resultSufix }}
             </p>
         </div>
