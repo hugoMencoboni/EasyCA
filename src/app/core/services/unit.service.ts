@@ -2,24 +2,31 @@ import { Injectable } from '@angular/core';
 import { Unit } from '../model/unit.model';
 import { UnitType } from '../model/unitType.enum';
 import { CurrencyService } from './currency.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Currency } from '../model/currency.enum';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UnitService {
 
-  constructor(private currencyService: CurrencyService) { }
+  constructor(private currencyService: CurrencyService, private snackbarService: SnackbarService) { }
 
   getUnits(): Observable<Array<Unit>> {
     return this.currencyService.getExchangeRate()
       .pipe(
+        catchError(() => {
+          const warning = 'Le chargement des taux de conversion de devises a rencontré un problème, les conversions peuvent être altérées.';
+          this.snackbarService.notifyWarning(warning);
+
+          return of(null);
+        }),
         map((data: Array<{ currency: Currency, rate: number }>) => {
-          const euroRate = data.find(c => c.currency === Currency.Euro);
-          const dollarRate = data.find(c => c.currency === Currency.Dollar);
-          const canadianDollarRate = data.find(c => c.currency === Currency.CanadianDollar);
+          const euroRate = data?.find(c => c.currency === Currency.Euro)?.rate ?? 0;
+          const dollarRate = data?.find(c => c.currency === Currency.Dollar)?.rate ?? 0;
+          const canadianDollarRate = data?.find(c => c.currency === Currency.CanadianDollar)?.rate ?? 0;
 
           const lengthUnits = [
             { label: 'centimettre', shortLabel: 'cm', type: UnitType.Length, weight: { a: 0.01, b: 0 } },
@@ -61,9 +68,9 @@ export class UnitService {
             ...areaUnits,
             ...volumeUnits,
 
-            { label: 'euro', shortLabel: '€', type: UnitType.Money, weight: { a: euroRate?.rate, b: 0 } },
-            { label: 'dollar canadien', shortLabel: '🍁$', type: UnitType.Money, weight: { a: canadianDollarRate?.rate, b: 0 } },
-            { label: 'dollar US', shortLabel: '$', type: UnitType.Money, weight: { a: dollarRate?.rate, b: 0 } },
+            { label: 'euro', shortLabel: '€', type: UnitType.Money, weight: { a: euroRate, b: 0 } },
+            { label: 'dollar canadien', shortLabel: '🍁$', type: UnitType.Money, weight: { a: canadianDollarRate, b: 0 } },
+            { label: 'dollar US', shortLabel: '$', type: UnitType.Money, weight: { a: dollarRate, b: 0 } },
 
             { label: 'celsius', shortLabel: '°C', type: UnitType.Temperature, weight: { a: 1, b: -273.15 } },
             { label: 'fahrenheit', shortLabel: '°F', type: UnitType.Temperature, weight: { a: 5 / 9, b: 5 / 9 * (-32) - 273.15 } },

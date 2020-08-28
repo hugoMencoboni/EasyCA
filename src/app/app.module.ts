@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { ConvertBoxComponent } from './convertBox/convertBox.component';
@@ -49,6 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSlideToggleModule,
     MatCardModule,
     MatInputModule,
+    MatSnackBarModule,
     HammerModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })

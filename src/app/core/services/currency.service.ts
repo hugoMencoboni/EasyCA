@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { retry, map, catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Currency } from '../model/currency.enum';
 import { CacheService } from './cache.service';
 import { CacheType } from '../model/cacheType.enum';
@@ -31,7 +31,7 @@ export class CurrencyService {
             return of(dirtyCachedData);
           }
 
-          throw err;
+          return throwError(err);
         }),
       );
     }

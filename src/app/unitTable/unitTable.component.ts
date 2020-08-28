@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges, OnChanges, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges, OnChanges, ViewChild, OnDestroy } from '@angular/core';
 import { UnitService } from '../core/services/unit.service';
 import { Unit } from '../core/model/unit.model';
 import { UnitType } from '../core/model/unitType.enum';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './unitTable.component.html',
   styleUrls: ['./unitTable.component.scss']
 })
-export class UnitTableComponent implements OnInit, OnChanges {
+export class UnitTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() backgroundColor = '#f7f8ff';
   @Input() color = '#4a5180';
   @Input() disableAllSectionBut: null | UnitType = null;
@@ -90,5 +90,9 @@ export class UnitTableComponent implements OnInit, OnChanges {
           break;
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

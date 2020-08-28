@@ -10,8 +10,12 @@ export class CacheService {
   getItem(code: string, cacheType: CacheType, tolerateDirty: boolean = false): any {
     const cacheKey = `${cacheType}|${code}`;
     const cachedData = (JSON.parse(localStorage.getItem(cacheKey)) as CacheItem);
-    cachedData.expiracy = cachedData.expiracy ? new Date(cachedData.expiracy) : undefined;
-    cachedData.dirtyAt = cachedData.dirtyAt ? new Date(cachedData.dirtyAt) : undefined;
+
+    if (cachedData) {
+      cachedData.expiracy = cachedData.expiracy ? new Date(cachedData.expiracy) : undefined;
+      cachedData.dirtyAt = cachedData.dirtyAt ? new Date(cachedData.dirtyAt) : undefined;
+    }
+
     const today = new Date();
 
     if (cachedData &&
