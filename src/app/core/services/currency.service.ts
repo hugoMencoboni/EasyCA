@@ -13,7 +13,6 @@ export class CurrencyService {
   key = 'c5282c046d66efb0a2ea';
   USD = 'USD_EUR';
   CAD = 'CAD_EUR';
-  cacheCode = '';
 
   constructor(private http: HttpClient, private cacheService: CacheService) { }
 
@@ -60,18 +59,18 @@ export class CurrencyService {
         }),
         tap(data => {
           const now = new Date();
-          const tomorow = new Date()
+          const tomorow = new Date();
           tomorow.setDate(now.getDate() + 1);
 
           const nextMounth = new Date();
           nextMounth.setMonth(now.getMonth() + 1);
 
-          this.cacheService.setItem(this.cacheCode, CacheType.CurrencyRate, data, tomorow, nextMounth);
+          this.cacheService.setItem(CacheType.CurrencyRate, data, tomorow, nextMounth);
         })
       );
   }
 
   private getExchangeRateFromCache(tolerateDirtyData: boolean): Array<{ currency: Currency, rate: number }> {
-    return this.cacheService.getItem(this.cacheCode, CacheType.CurrencyRate, tolerateDirtyData);
+    return this.cacheService.getItem(CacheType.CurrencyRate, tolerateDirtyData);
   }
 }

@@ -7,8 +7,7 @@ import { CacheItem } from '../model/cacheItem.model';
 })
 export class CacheService {
 
-  getItem(code: string, cacheType: CacheType, tolerateDirty: boolean = false): any {
-    const cacheKey = `${cacheType}|${code}`;
+  getItem(cacheKey: CacheType, tolerateDirty: boolean = false): any {
     const cachedData = (JSON.parse(localStorage.getItem(cacheKey)) as CacheItem);
 
     if (cachedData) {
@@ -26,9 +25,7 @@ export class CacheService {
     return undefined;
   }
 
-  setItem(code: string, cacheType: CacheType, data: any, expiracy?: Date, dirtyAt?: Date) {
-    const cacheKey = `${cacheType}|${code}`;
-
+  setItem(cacheKey: CacheType, data: any, expiracy?: Date, dirtyAt?: Date) {
     const cacheData: CacheItem = {
       data,
       dirtyAt,

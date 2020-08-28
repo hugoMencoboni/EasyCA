@@ -1,6 +1,6 @@
 export enum CacheType {
-    CurrencyRate = 1,
-    SimpleConversion,
-    RatioConversion,
-    TimeDiff
+    CurrencyRate = 'CurrencyRate',
+    SimpleConversion = 'SimpleConversion',
+    RatioConversion = 'RatioConversion',
+    TimeDiff = 'TimeDiff'
 }
