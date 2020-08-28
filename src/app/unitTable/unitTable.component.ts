@@ -3,6 +3,7 @@ import { UnitService } from '../core/services/unit.service';
 import { Unit } from '../core/model/unit.model';
 import { UnitType } from '../core/model/unitType.enum';
 import { MatTabGroup } from '@angular/material/tabs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-unit-table',
@@ -27,36 +28,39 @@ export class UnitTableComponent implements OnInit, OnChanges {
 
   units: Array<Unit>;
   get lengthUnit(): Array<Unit> {
-    return this.units.filter(u => u.type === UnitType.Length);
+    return this.units?.filter(u => u.type === UnitType.Length);
   }
 
   get areaUnit(): Array<Unit> {
-    return this.units.filter(u => u.type === UnitType.Area);
+    return this.units?.filter(u => u.type === UnitType.Area);
   }
 
   get volumeUnit(): Array<Unit> {
-    return this.units.filter(u => u.type === UnitType.Volume);
+    return this.units?.filter(u => u.type === UnitType.Volume);
   }
 
   get weightUnit(): Array<Unit> {
-    return this.units.filter(u => u.type === UnitType.Weight);
+    return this.units?.filter(u => u.type === UnitType.Weight);
   }
 
   get temperatureUnit(): Array<Unit> {
-    return this.units.filter(u => u.type === UnitType.Temperature);
+    return this.units?.filter(u => u.type === UnitType.Temperature);
   }
 
   get moneyUnit(): Array<Unit> {
-    return this.units.filter(u => u.type === UnitType.Money);
+    return this.units?.filter(u => u.type === UnitType.Money);
   }
 
   hoverIndex: number | undefined;
   unitTypes = UnitType;
+  subscription = new Subscription();
 
   constructor(private unitService: UnitService) { }
 
   ngOnInit() {
-    this.units = this.unitService.getUnits();
+    this.subscription.add(
+      this.unitService.getUnits().subscribe((units: Array<Unit>) => this.units = units)
+    );
   }
 
   unitChoosed(unit: Unit): void {
