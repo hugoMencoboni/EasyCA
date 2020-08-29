@@ -95,6 +95,10 @@ export class SimpleConversionComponent implements OnInit {
     };
   }
 
+  trackById(favorite: any, index: number): string {
+    return favorite?.id;
+  }
+
   onFavorite(): void {
     const favoriteId = this.isFavorite;
     if (this.isFavorite) {
