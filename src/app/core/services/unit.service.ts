@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Currency } from '../model/currency.enum';
 import { SnackbarService } from './snackbar.service';
+import { Units } from '../model/units.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -29,17 +30,18 @@ export class UnitService {
           const canadianDollarRate = data?.find(c => c.currency === Currency.CanadianDollar)?.rate ?? 0;
 
           const lengthUnits = [
-            { label: 'centimettre', shortLabel: 'cm', type: UnitType.Length, weight: { a: 0.01, b: 0 } },
-            { label: 'mettre', shortLabel: 'm', type: UnitType.Length, weight: { a: 1, b: 0 } },
-            { label: 'kilomettre', shortLabel: 'km', type: UnitType.Length, weight: { a: 1000, b: 0 } },
-            { label: 'inch', shortLabel: 'in', type: UnitType.Length, weight: { a: 0.0254, b: 0 } },
-            { label: 'foot', shortLabel: 'ft', type: UnitType.Length, weight: { a: 0.3048, b: 0 } },
-            { label: 'yard', shortLabel: 'yd', type: UnitType.Length, weight: { a: 0.9144, b: 0 } },
-            { label: 'mile', shortLabel: 'mi', type: UnitType.Length, weight: { a: 1609.34, b: 0 } }
+            { unit: Units.CM, label: 'centimettre', shortLabel: 'cm', type: UnitType.Length, weight: { a: 0.01, b: 0 } },
+            { unit: Units.M, label: 'mettre', shortLabel: 'm', type: UnitType.Length, weight: { a: 1, b: 0 } },
+            { unit: Units.KM, label: 'kilomettre', shortLabel: 'km', type: UnitType.Length, weight: { a: 1000, b: 0 } },
+            { unit: Units.INCH, label: 'inch', shortLabel: 'in', type: UnitType.Length, weight: { a: 0.0254, b: 0 } },
+            { unit: Units.FOOT, label: 'foot', shortLabel: 'ft', type: UnitType.Length, weight: { a: 0.3048, b: 0 } },
+            { unit: Units.YARD, label: 'yard', shortLabel: 'yd', type: UnitType.Length, weight: { a: 0.9144, b: 0 } },
+            { unit: Units.MILE, label: 'mile', shortLabel: 'mi', type: UnitType.Length, weight: { a: 1609.34, b: 0 } }
           ];
 
           const areaUnits = lengthUnits.map(lu => {
             return {
+              unit: lu.unit,
               label: lu.label + '²',
               shortLabel: lu.shortLabel + '²',
               type: UnitType.Area,
@@ -49,6 +51,7 @@ export class UnitService {
 
           const volumeUnits = lengthUnits.map(lu => {
             return {
+              unit: lu.unit,
               label: lu.label + '³',
               shortLabel: lu.shortLabel + '³',
               type: UnitType.Volume,
@@ -57,24 +60,30 @@ export class UnitService {
           });
 
           return [
-            { label: 'gramme', shortLabel: 'g', type: UnitType.Weight, weight: { a: 1, b: 0 } },
-            { label: 'kilogramme', shortLabel: 'kg', type: UnitType.Weight, weight: { a: 1000, b: 0 } },
-            { label: 'ounce', shortLabel: 'oz', type: UnitType.Weight, weight: { a: 28.35, b: 0 } },
-            { label: 'pound (livre)', shortLabel: 'lb', type: UnitType.Weight, weight: { a: 453.59, b: 0 } },
-            { label: 'stone', shortLabel: 'st', type: UnitType.Weight, weight: { a: 6350, b: 0 } },
-            { label: 'quarter', shortLabel: 'qt', type: UnitType.Weight, weight: { a: 12700, b: 0 } },
+            { unit: Units.G, label: 'gramme', shortLabel: 'g', type: UnitType.Weight, weight: { a: 1, b: 0 } },
+            { unit: Units.KG, label: 'kilogramme', shortLabel: 'kg', type: UnitType.Weight, weight: { a: 1000, b: 0 } },
+            { unit: Units.OUNCE, label: 'ounce', shortLabel: 'oz', type: UnitType.Weight, weight: { a: 28.35, b: 0 } },
+            { unit: Units.POUND, label: 'pound (livre)', shortLabel: 'lb', type: UnitType.Weight, weight: { a: 453.59, b: 0 } },
+            { unit: Units.STONE, label: 'stone', shortLabel: 'st', type: UnitType.Weight, weight: { a: 6350, b: 0 } },
+            { unit: Units.QUARTER, label: 'quarter', shortLabel: 'qt', type: UnitType.Weight, weight: { a: 12700, b: 0 } },
 
             ...lengthUnits,
             ...areaUnits,
             ...volumeUnits,
 
-            { label: 'euro', shortLabel: '€', type: UnitType.Money, weight: { a: euroRate, b: 0 } },
-            { label: 'dollar canadien', shortLabel: '🍁$', type: UnitType.Money, weight: { a: canadianDollarRate, b: 0 } },
-            { label: 'dollar US', shortLabel: '$', type: UnitType.Money, weight: { a: dollarRate, b: 0 } },
+            { unit: Units.EURO, label: 'euro', shortLabel: '€', type: UnitType.Money, weight: { a: euroRate, b: 0 } },
+            {
+              unit: Units.CANADIAN_DOLLAR, label: 'dollar canadien', shortLabel: 'C$', type: UnitType.Money,
+              weight: { a: canadianDollarRate, b: 0 }
+            },
+            { unit: Units.DOLLAR, label: 'dollar US', shortLabel: 'US$', type: UnitType.Money, weight: { a: dollarRate, b: 0 } },
 
-            { label: 'celsius', shortLabel: '°C', type: UnitType.Temperature, weight: { a: 1, b: -273.15 } },
-            { label: 'fahrenheit', shortLabel: '°F', type: UnitType.Temperature, weight: { a: 5 / 9, b: 5 / 9 * (-32) - 273.15 } },
-            { label: 'kelvin', shortLabel: 'K', type: UnitType.Temperature, weight: { a: 1, b: 0 } },
+            { unit: Units.CELSIUS, label: 'celsius', shortLabel: '°C', type: UnitType.Temperature, weight: { a: 1, b: -273.15 } },
+            {
+              unit: Units.FAHRENHEIT, label: 'fahrenheit', shortLabel: '°F', type: UnitType.Temperature,
+              weight: { a: 5 / 9, b: 5 / 9 * (-32) - 273.15 }
+            },
+            { unit: Units.KELVIN, label: 'kelvin', shortLabel: 'K', type: UnitType.Temperature, weight: { a: 1, b: 0 } },
           ];
         })
       );

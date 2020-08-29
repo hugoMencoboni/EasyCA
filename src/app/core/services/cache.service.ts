@@ -18,7 +18,7 @@ export class CacheService {
     const today = new Date();
 
     if (cachedData &&
-      (cachedData.expiracy > today || tolerateDirty && cachedData.dirtyAt > today)) {
+      (cachedData.expiracy > today || !cachedData.expiracy || tolerateDirty && cachedData.dirtyAt > today)) {
       return cachedData.data;
     }
 
