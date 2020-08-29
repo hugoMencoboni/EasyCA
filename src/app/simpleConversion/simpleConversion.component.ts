@@ -81,7 +81,7 @@ export class SimpleConversionComponent implements OnInit {
     if (idFavorite) {
       const favorite = this.favorite.find(f => f.id === idFavorite);
       [favorite.from, favorite.to] = [favorite.to, favorite.from];
-      favorite.convertionFactor = this.processConvertionFactor(favorite.from, favorite.to)
+      favorite.convertionFactor = this.processConvertionFactor(favorite.from, favorite.to);
     } else if (this.completed) {
       [this.from, this.to] = [this.to, this.from];
       this.convertionFactor = this.processConvertionFactor(this.from, this.to);

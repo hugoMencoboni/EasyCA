@@ -8,16 +8,33 @@
             <p [ngClass]="{'selected': unitIndex === 3}" class="inline"> {{ toP2 ? toP2.shortLabel : '?'  }}</p>
         </h1>
         <div class="headerIcon">
+            <mat-icon *ngIf="completed" (click)="onFavorite()">{{!!isFavorite ? 'star' : 'star_border'}}</mat-icon>
             <mat-icon (click)="reset()">delete</mat-icon>
         </div>
-        <app-unit-table *ngIf="showUnitTable" [disableAllSectionBut]="nextType" [hideTemperature]="'true'"
+        <app-unit-table *ngIf="!completed" [disableAllSectionBut]="nextType" [hideTemperature]="'true'"
             (unitSelected)="unitSelected($event)">
         </app-unit-table>
         <div class="marginTop">
             <app-convert-box [inputSufix]="inputSufix" [resultSufix]="resultSufix" [convertIconClickable]="'true'"
-                [precision]="3" [enable]="convertionEnable" [factor]="convertionFactor"
+                [precision]="3" [enable]="completed" [factor]="convertionFactor"
                 (reverseConvertion)="reverseConvertion()">
             </app-convert-box>
         </div>
     </mat-card-content>
 </mat-card>
+
+<ng-container *ngFor="let f of favorite;">
+    <mat-card class="cards">
+        <mat-card-content>
+            <div class="headerIcon">
+                <mat-icon (click)="removeFromFavorite(f.id)">star</mat-icon>
+            </div>
+            <div class="marginTop-ligth">
+                <app-convert-box [inputSufix]="f.fromP1.shortLabel + '/' + f.fromP2.shortLabel"
+                    [resultSufix]="f.toP1.shortLabel + '/' + f.toP2.shortLabel" [convertIconClickable]="'true'"
+                    [factor]="f.convertionFactor" (reverseConvertion)="reverseConvertion(f.id)">
+                </app-convert-box>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</ng-container>
