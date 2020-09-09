@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFR from '@angular/common/locales/fr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -26,6 +28,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+
+registerLocaleData(localeFR);
 
 @NgModule({
   declarations: [
