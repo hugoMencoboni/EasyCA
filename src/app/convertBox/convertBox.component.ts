@@ -2,11 +2,13 @@ import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, SimpleChange
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { UnitWeight } from '../core/model/unitWeight.model';
+import { pulseTrigger } from '../core/animations/pulse';
 
 @Component({
   selector: 'app-convert-box',
   templateUrl: './convertBox.component.html',
-  styleUrls: ['./convertBox.component.scss']
+  styleUrls: ['./convertBox.component.scss'],
+  animations: [pulseTrigger({ params: { delay: '500ms' } })]
 })
 export class ConvertBoxComponent implements OnInit, OnChanges, OnDestroy {
   @Input() enable = true;

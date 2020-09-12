@@ -1,11 +1,11 @@
 <mat-card class="cards">
     <mat-card-content>
         <h1 class="centerText">
-            <p [ngClass]="{'selected': unitIndex === 0}" class="inline">{{ fromP1 ? fromP1.shortLabel : '?' }} </p>/
-            <p [ngClass]="{'selected': unitIndex === 1}" class="inline">{{ fromP2 ? fromP2.shortLabel : '?' }} </p>
+            <p [@rotate]="fromP1 ? 'rotation' : '*'" [ngClass]="{'selected': unitIndex === 0}" class="inline">{{ fromP1 ? fromP1.shortLabel : '?' }} </p>/
+            <p [@rotate]="fromP2 ? 'rotation' : '*'" [ngClass]="{'selected': unitIndex === 1}" class="inline">{{ fromP2 ? fromP2.shortLabel : '?' }} </p>
             <mat-icon class="marginSize-ligth" style="vertical-align: sub">multiple_stop</mat-icon>
-            <p [ngClass]="{'selected': unitIndex === 2}" class="inline"> {{ toP1 ? toP1.shortLabel : '?'  }}</p>/
-            <p [ngClass]="{'selected': unitIndex === 3}" class="inline"> {{ toP2 ? toP2.shortLabel : '?'  }}</p>
+            <p [@rotate]="toP1 ? 'rotation' : '*'" [ngClass]="{'selected': unitIndex === 2}" class="inline"> {{ toP1 ? toP1.shortLabel : '?'  }}</p>/
+            <p [@rotate]="toP2 ? 'rotation' : '*'" [ngClass]="{'selected': unitIndex === 3}" class="inline"> {{ toP2 ? toP2.shortLabel : '?'  }}</p>
         </h1>
         <div class="headerIcon">
             <mat-icon *ngIf="completed" (click)="onFavorite()">{{!!isFavorite ? 'star' : 'star_border'}}</mat-icon>

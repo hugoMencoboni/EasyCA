@@ -7,11 +7,13 @@ import { CacheType } from '../core/model/cacheType.enum';
 import { v4 as uuidv4 } from 'uuid';
 import { UnitService } from '../core/services/unit.service';
 import { take } from 'rxjs/operators';
+import { rotateTrigger } from '../core/animations/rotate';
 
 @Component({
   selector: 'app-simple-conversion',
   templateUrl: './simpleConversion.component.html',
-  styleUrls: ['./simpleConversion.component.scss']
+  styleUrls: ['./simpleConversion.component.scss'],
+  animations: [rotateTrigger]
 })
 export class SimpleConversionComponent implements OnInit {
   from: Unit;

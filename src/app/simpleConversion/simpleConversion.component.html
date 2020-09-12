@@ -1,9 +1,11 @@
 <mat-card class="cards">
     <mat-card-content>
         <h1 class="centerText">
-            <p [ngClass]="{'selected': unitIndex === 0}" class="inline">{{ from ? from.shortLabel : '?' }} </p>
+            <p [@rotate]="from ? 'rotation' : '*'" [ngClass]="{'selected': unitIndex === 0}" class="inline">
+                {{ from ? from.shortLabel : '?' }} </p>
             <mat-icon class="marginSize-ligth" style="vertical-align: sub">multiple_stop</mat-icon>
-            <p [ngClass]="{'selected': unitIndex === 1}" class="inline"> {{ to ? to.shortLabel : '?'  }}</p>
+            <p [@rotate]="to ? 'rotation' : '*'" [ngClass]="{'selected': unitIndex === 1}" class="inline">
+                {{ to ? to.shortLabel : '?'  }}</p>
         </h1>
         <div class="headerIcon">
             <mat-icon *ngIf="completed" (click)="onFavorite()">{{!!isFavorite ? 'star' : 'star_border'}}</mat-icon>

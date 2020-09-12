@@ -7,11 +7,13 @@ import { UnitService } from '../core/services/unit.service';
 import { take } from 'rxjs/operators';
 import { CacheType } from '../core/model/cacheType.enum';
 import { v4 as uuidv4 } from 'uuid';
+import { rotateTrigger } from '../core/animations/rotate';
 
 @Component({
     selector: 'app-ratio-conversion',
     templateUrl: './ratioConversion.component.html',
-    styleUrls: ['./ratioConversion.component.scss']
+    styleUrls: ['./ratioConversion.component.scss'],
+    animations: [rotateTrigger]
 })
 export class RatioConversionComponent implements OnInit {
     fromP1: Unit;

@@ -11,7 +11,8 @@
         <p *ngIf="inputSufix">{{ inputSufix }}</p>
     </div>
 
-    <mat-icon class="rotateOnResize" [ngClass]="{'hoverBolder': convertIconClickable}" (click)="convertIconClicked()">
+    <mat-icon [@pulse]="enable && convertIconClickable ? 'pulse' : '*'" class="rotateOnResize"
+        [ngClass]="{'hoverBolder': convertIconClickable}" (click)="convertIconClicked()">
         {{ convertIcon }}</mat-icon>
 
     <!-- Result -->
