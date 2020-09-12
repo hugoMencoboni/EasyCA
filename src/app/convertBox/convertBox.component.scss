@@ -7,17 +7,6 @@
     gap:10px;
 }
 
-@media all and (max-width:500px) {
-    .flexResponsive {
-        flex-direction: column;
-
-        .rotateOnResize {
-            transform: rotate(90deg);
-            margin-bottom: 20px;
-        }
-    }
-}
-
 .resultBox {
     background-color: #f7f8ff;
     border-radius: 7px;
@@ -28,5 +17,23 @@
     .result {
         display: inline-block;
         min-width: 100px;
+    }
+}
+
+@media all and (max-width:520px) {
+    .resultBox .result {
+        display: inline-block;
+        min-width: 50px;
+    }
+}
+
+@media all and (max-width:360px) {
+    .flexResponsive {
+        flex-direction: column;
+
+        .rotateOnResize {
+            transform: rotate(90deg);
+            margin-bottom: 20px;
+        }
     }
 }

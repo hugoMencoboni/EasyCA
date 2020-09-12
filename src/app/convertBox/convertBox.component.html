@@ -1,7 +1,7 @@
 <form class="flexResponsive">
     <!-- Input -->
     <div class="flex">
-        <mat-form-field>
+        <mat-form-field [style.width.vw]="20">
             <mat-icon *ngIf="inputIconPrefix" style="vertical-align: sub">{{ inputIconPrefix }}</mat-icon>
             <p *ngIf="inputPrefix" class="inline">{{ inputPrefix }}</p>
             <input style="text-align: right;" matInput [formControl]="value" type="number"
