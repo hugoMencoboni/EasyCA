@@ -8,7 +8,8 @@
                 {{ to ? to.shortLabel : '?'  }}</p>
         </h1>
         <div class="headerIcon">
-            <mat-icon *ngIf="completed" (click)="onFavorite()">{{!!isFavorite ? 'star' : 'star_border'}}</mat-icon>
+            <mat-icon *ngIf="completed" [ngClass]="!!isFavorite ? 'favorite' : ''" (click)="onFavorite()">
+                {{!!isFavorite ? 'star' : 'star_border'}}</mat-icon>
             <mat-icon (click)="reset()">delete</mat-icon>
         </div>
         <app-unit-table *ngIf="!completed" (unitSelected)="unitSelected($event)" [disableAllSectionBut]="nextType">
@@ -26,7 +27,7 @@
     <mat-card class="cards">
         <mat-card-content>
             <div class="headerIcon">
-                <mat-icon (click)="removeFromFavorite(f.id)">star</mat-icon>
+                <mat-icon (click)="removeFromFavorite(f.id)" class="favorite">star</mat-icon>
             </div>
             <div class="marginTop-ligth">
                 <app-convert-box [inputSufix]="f.from.shortLabel" [resultSufix]="f.to.shortLabel"
